@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Bouldergram | {{ post.title }}{% endblock %}
+
+{% block content %}
+
+<div class="post-detail-page mx-auto">
+
+
+    <div class="card mx-auto" style="width: 50rem;">
+      {% if post.post_image %}
+      <img src="{{ post.post_image.url }}" class="card-img-top" alt="...">
+      {% endif %}
+      <div class="card-body">
+        <h3 class="card-title"><strong>{{ post.title }}</strong> - {{ post.grades }}
+
+
+          {% if user.is_authenticated %}
+              {% if user.id == post.author.id %}
+
+              <div class="btn-group btn-sm "  role="group">
+                <button id="btnGroupDrop1" type="button" class="btn btn-outline-secondary dropdown-toggle btn-sm"
+                        data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false"><i class="fas fa-ellipsis-v"></i></i></button>
+              <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                <a class="dropdown-item" href="{% url 'post-edit' post.pk %}">Edit</a>
+                <a class="dropdown-item" href="{% url 'post-delete' post.pk %}">Delete</a>
+              </div>
+              </div>
+
+              {% endif %}
+          {% endif  %}
+
+        </h3>
+
+
+
+        <h4 class="card-subtitle mb-2 text-muted"><a href="{% url 'user_profile_page' post.author.userprofile.id %}">
+        {{ post.author }}</a> - <small>{{ post.post_date }}
+           {{ post.post_time }}</small></h4>
+
+        <h6 class="card-subtitle mb-2 text-muted">{{ post.title_tag }}</h6> <hr>
+
+        <p class="card-text">{{ post.body|safe }}</p>
+        <hr>
+        <p>{{ total_likes }} - Bomber
+        {{ total_dislikes }} - Bummer</p>
+
+        {% if user.is_authenticated %}
+
+            {% if liked == False %}
+            <span id='outer'>
+            <form class='inner' action="{% url 'like_post' post.pk %}" method="POST">
+              {% csrf_token %}
+              <button type='submit' name='post_id' value='{{ post.id }}'
+                class='btn btn-info btn-sm'><i class="fas fa-thumbs-up"></i> Bomber</button>
+            </form>
+            <form class='inner' action="{% url 'dislike_post' post.pk %}" method="POST">
+              {% csrf_token %}
+              <button type='submit' name='dislike_post_id' value='{{ post.id }}'
+                class='btn btn-danger btn-sm'><i class="fas fa-thumbs-down"></i> Bummer</button>
+            </form>
+            </span>
+            {% else %}
+
+            <span id='outer'>
+            <form class='inner' action="{% url 'like_post' post.pk %}" method="POST">
+              {% csrf_token %}<button type='submit' name='post_id' value='{{ post.id }}'
+                class='btn btn-info btn-sm'><i class="fas fa-thumbs-up"></i> Bomber</button>
+            </form>
+            <form class='inner' action="{% url 'dislike_post' post.pk %}" method="POST">
+              {% csrf_token %}<button type='submit' name='dislike_post_id' value='{{ post.id }}'
+                class='btn btn-danger btn-sm'><i class="fas fa-thumbs-down"></i> Bummer</button>
+            </form>
+            </span>
+            {% endif %}
+
+
+
+        {% else %}
+          <a href="{% url 'login' %}">Login</a> to like!
+
+        {% endif %}
+
+
+        </div>
+    </div>
+
+    <hr>
+    <span class="navbar-nav mx-auto" style="width: 50rem;">
+    <a href="{% url 'home' %}" class="btn btn-secondary btn-sm backattack">Back</a> </span>
+
+      <hr>
+
+
+      <div class="card mx-auto" style="width: 50rem;">
+        <h5 class="card-header">Comments...
+          </h5>
+        <div class="card-body">
+          {% if not post.comments.all %}
+
+          <h6 class="card-title">No Comments Yet... <a href="{% url 'create_comment' post.pk %}">Add one!</a></h6>
+          {% else %}
+          <h6 class="card-title"><a href="{% url 'create_comment' post.pk %}">Add Comment</a></h6>
+              {% for comment in post.comments.all %}
+                <h5 class="card-title"><strong>
+                <hr>{{ comment.name }} - {{ comment.date_added}} </strong></h5>
+                  <p class="card-text"><br>{{ comment.body }}<br> </p>
+
+                  {% endfor %}
+                {% endif %}
+          </div>
+      </div>
+
+      <br><br>
+
+</div>
+
+{% endblock %}

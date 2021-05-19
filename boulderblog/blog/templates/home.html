@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<div class="jumbotron jumbotron-fluid jumboboy">
+  <div class="container ">
+    <strong><h1 class="display-4">Welcome To Bouldergram!</h1></strong>
+
+    <p class="lead">The premiere destination for all things rock climbing. <br> Share your project, how to get to your favourite route and proposed some beta... <br> All in one place!
+      <br>  <br> <hr> <br>
+    You can also read more about Bouldergram <a href="{% url 'about' %}">here!</a> </p>
+  </div>
+</div>
+
+
+
+
+
+
+<br>
+
+
+
+
+{% for post in object_list %}
+<ul class="unordered_chaos">
+<div class="post-detail-page mx-auto">
+
+<hr>
+    <div class="card mx-auto" style="width: 50rem;">
+      {% if post.post_image %}
+      <img src="{{ post.post_image.url }}" class="card-img-top" alt="...">
+      {% endif %}
+      <div class="card-body">
+        <h3 class="card-title"><a href="{% url 'post-detail' post.pk %}">
+           <strong>{{ post.title }}</strong></a> - <a href="{% url 'country' post.country|slugify %}">{{ post.country }}</a> - {{ post.grades }}
+
+          {% if user.is_authenticated %}
+              {% if user.id == post.author.id %}
+              <div class="btn-group btn-sm "  role="group">
+                <button id="btnGroupDrop1" type="button" class="btn btn-outline-secondary dropdown-toggle btn-sm"
+                        data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false"><i class="fas fa-ellipsis-v"></i></i></button>
+              <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                <a class="dropdown-item" href="{% url 'post-edit' post.pk %}">Edit</a>
+                <a class="dropdown-item" href="{% url 'post-delete' post.pk %}">Delete</a>
+              </div>
+              </div>
+              {% endif %}
+          {% endif  %}
+        </h3>
+
+        <h4 class="card-subtitle mb-2 text-muted"><a href="{% url 'user_profile_page' post.author.userprofile.id %}">
+        {{ post.author }}</a> - <small>{{ post.post_date }}
+           {{ post.post_time }}</small></h4>
+
+        <h6 class="card-subtitle mb-2 text-muted">{{ post.title_tag }}</h6> <hr>
+
+        <p class="card-text">{{ post.body|truncatechars:"200"|safe }}</p>
+
+        <br>
+        <hr>
+
+        </div>
+      </div>
+</div>
+</ul>
+
+
+{% endfor %}
+
+
+<br><br>
+
+
+{% endblock %}

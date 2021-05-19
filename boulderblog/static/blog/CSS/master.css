@@ -1,0 +1,53 @@
+
+
+body{
+  font-family: 'Montserrat', sans-serif;
+  color: #2a435b;
+  padding-top: 70px;
+  background-color: #efeae5;
+  /* border: 60px solid #2EC4B6; */
+  border-top: 0px;
+  /*border-bottom: 0px;*/
+  margin:auto;
+  /* margin: 0px; */
+}
+
+.jumboboy{
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  margin:auto;
+  text-align: center;
+  background-color: #a6a6a6;
+
+}
+
+.aboutjumbo{
+  font-family: 'Montserrat', sans-serif;
+  background-color: #a6a6a6;
+
+}
+
+
+
+.unordered_chaos{
+  margin:auto;
+  position: relative;
+}
+
+#outer{
+    width:100%;
+    text-align: center;
+}
+.inner{
+    display: inline-block;
+}
+
+
+.post-detail-page{
+  margin: auto;
+}
+
+.backattack{
+  margin-right: ($spacer * .25) !important;
+
+}

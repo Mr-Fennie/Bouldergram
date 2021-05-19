@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Bouldergram | Edit Profile Page{% endblock %}
+
+{% block content %}
+
+
+{% if user.is_authenticated %}
+    {% if user.id == userprofile.user.id %}
+    <h1>Edit Profile Page...</h1>
+    <br><br>
+
+      <div class="form-group">
+        <form method="POST" enctype='multipart/form-data'>
+          {% csrf_token %}
+                  <h5>Profile Picture:</h5>{{ form.profile_pic }} <br>
+                  <h5>Bio:</h5>{{ form.bio }}
+            <br> <h5>Website:</h5>{{ form.website_url }}
+            <br><h5>Social Media: </h5>
+            <br> <h6>Youtube Link:</h6> {{ form.youtube_url }}
+            <br> <h5>Twitter Link:</h5>{{ form.twitter_url }}
+            <br> <h5>Instagram Link:</h5>{{ form.instagram_url }}
+
+
+
+
+          <br> <br> <button class="btn btn-secondary">Update Profile Page</button> <a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
+
+
+        </form>
+      </div>
+    {% else %}
+
+    <h2>Apologies, you are not allowed!<br>Please go <a href="{% url 'home' %}">back!</a></h2>
+    {% endif %}
+
+{% else %}
+
+    <h2>Apologies, you are not allowed!<br>Please <a href="{% url 'signup' %}">sign up</a> or
+                                          <a href="{% url 'login' %}">login</a>!</h2>
+
+{% endif %}
+
+
+{% endblock %}

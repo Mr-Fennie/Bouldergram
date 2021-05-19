@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}Bouldergram | Country{% endblock %}
+
+{% block content %}
+
+{% if country_posts %}
+
+<h1>{{ cont }}:<br> Available crags...</h1>
+
+<br>
+
+
+{% for post in country_posts %}
+<div class="post-detail-page mx-auto">
+
+<hr>
+    <div class="card mx-auto" style="width: 50rem;">
+      {% if post.post_image %}
+      <img src="{{ post.post_image.url }}" class="card-img-top" alt="...">
+      {% endif %}
+      <div class="card-body">
+        <h3 class="card-title"><a href="{% url 'post-detail' post.pk %}">
+           <strong>{{ post.title }}</strong></a> - {{ post.country }} - {{ post.grades }}
+
+        {% if user.is_authenticated %}
+              {% if user.id == post.author.id %}
+
+              <div class="btn-group btn-sm "  role="group">
+                <button id="btnGroupDrop1" type="button" class="btn btn-outline-secondary dropdown-toggle btn-sm"
+                        data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false"><i class="fas fa-ellipsis-v"></i></i></button>
+              <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                <a class="dropdown-item" href="{% url 'post-edit' post.pk %}">Edit</a>
+                <a class="dropdown-item" href="{% url 'post-delete' post.pk %}">Delete</a>
+              </div>
+              </div>
+
+              {% endif %}
+          {% endif  %}
+        </h3>
+
+        <h4 class="card-subtitle mb-2 text-muted"><a href="{% url 'user_profile_page' post.author.userprofile.id %}">
+        {{ post.author }}</a> - <small>{{ post.post_date }}
+           {{ post.post_time }}</small></h4>
+
+        <h6 class="card-subtitle mb-2 text-muted">{{ post.title_tag }}</h6> <hr>
+
+        <p class="card-text">{{ post.body|truncatechars:"200"|safe }}</p>
+
+
+        </div>
+    </div>
+{% endfor %}
+
+
+{% else %}
+
+    <h3>Oh! This is embarrassing, the page you requested does not exit... yet!<br><a href="{% url 'create_post' %}" >Create</a> a post now and populate this page!</h3>
+
+
+{% endif %}
+
+{% endblock %}

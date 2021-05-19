@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Bouldergram | Create Post{% endblock %}
+
+{% block content %}
+
+
+{% if user.is_authenticated %}
+    <h1>Add Post...</h1>
+    <br><br>
+
+    <div class="form-group">
+      <form method="POST" enctype='multipart/form-data'>
+        {% csrf_token %}
+        {{ form.media }}
+              <h5>Upload Boulder:</h5>{{ form.post_image }} <br>
+              <h5>Title of route:</h5>{{ form.title }}
+        <br> <h5>Tags:</h5>{{ form.title_tag }}
+        <br> <h5>Country where crag/route can be found:</h5> {{ form.country }}
+        <br> <h5>Climbing grade(French system):</h5>{{ form.grades }}
+        <br> <h5>Route guide/Beta:</h5>{{ form.body }}
+                                        {{ form.author }}
+        <br> <br> <button class="btn btn-secondary">Post</button>
+
+      </form>
+    </div>
+    <script>
+        var name = "{{ user.id }}";
+        document.getElementById("userid").value
+            = name;
+    </script>
+
+{% else %}
+
+<h2>Apologies, you are not allowed!<br>Please <a href="{% url 'signup' %}">sign up</a> or
+                                          <a href="{% url 'login' %}">login</a>!</h2>
+
+{% endif %}
+
+
+{% endblock %}

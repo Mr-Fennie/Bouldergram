@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Bouldergram | User Profile{% endblock %}
+
+{% block content %}
+
+    <div class="card mx-auto" style="width: 50rem;">
+
+      {% if page_user.profile_pic %}
+      <img src="{{ page_user.profile_pic.url }}" class="card-img-top" width= 100%>
+      {% else  %}
+      <img src="{% static 'blog/images/1climb.png' %}" class="card-img-top" width= 100%>
+
+      {% endif %}
+
+
+      <div class="card-body">
+        <h3 class="card-title">{{ page_user }}</h3>
+        <p class="card-text">{{ page_user.bio }}</p>
+      </div> <hr>
+      <div class="card-body mx-auto">
+          {% if page_user.website_url %}
+            <a href="{{ page_user.website_url }}">Website</a> |
+          {% endif %}
+          {% if page_user.youtube_url %}
+            <a href="{{ page_user.youtube_url }}">YouTube</a> |
+          {% endif %}
+          {% if page_user.twitter_url %}
+            <a href="{{ page_user.twitter_url }}">Twitter</a> |
+          {% endif %}
+          {% if page_user.instagram_url %}
+            <a href="{{ page_user.instagram_url }}">Instagram</a>
+          {% endif %}
+      </div>
+    </div>
+
+
+    <br><hr>
+    <span class="navbar-nav mx-auto" style="width: 50rem;">
+    <a href="{% url 'home' %}" class="btn btn-secondary btn-sm backattack">Back</a> </span>
+    <br><br>
+
+{% endblock %}

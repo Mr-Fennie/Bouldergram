@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Bouldergram | Profile Settings{% endblock %}
+{% block content %}
+
+
+
+<h1>Edit Settings...</h1>
+
+
+<br><br>
+
+
+<div class="form-group">
+
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+
+    <button class="btn btn-secondary">Update Profile</button> <a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
+  </form>
+</div>
+
+{% endblock %}
