@@ -7,7 +7,7 @@
 <div class="post-detail-page mx-auto">
 
 
-    <div class="card mx-auto" style="width: 50rem;">
+    <div class="card mx-auto imagefit" >
       {% if post.post_image %}
       <img src="{{ post.post_image.url }}" class="card-img-top" alt="...">
       {% endif %}
@@ -87,13 +87,13 @@
     </div>
 
     <hr>
-    <span class="navbar-nav mx-auto" style="width: 50rem;">
+    <span class="navbar-nav mx-auto">
     <a href="{% url 'home' %}" class="btn btn-secondary btn-sm backattack">Back</a> </span>
 
       <hr>
 
 
-      <div class="card mx-auto" style="width: 50rem;">
+      <div class="card mx-auto" >
         <h5 class="card-header">Comments...
           </h5>
         <div class="card-body">

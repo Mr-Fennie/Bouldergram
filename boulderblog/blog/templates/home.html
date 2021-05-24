@@ -4,8 +4,8 @@
 {% block content %}
 
 <div class="jumbotron jumbotron-fluid jumboboy">
-  <div class="container ">
-    <strong><h1 class="display-4">Welcome To Bouldergram!</h1></strong>
+  <div >
+    <h1>Welcome To Bouldergram!</h1>
 
     <p class="lead">The premiere destination for all things rock climbing. <br> Share your project, how to get to your favourite route and proposed some beta... <br> All in one place!
       <br>  <br> <hr> <br>
@@ -24,11 +24,11 @@
 
 
 {% for post in object_list %}
-<ul class="unordered_chaos">
+
 <div class="post-detail-page mx-auto">
 
 <hr>
-    <div class="card mx-auto" style="width: 50rem;">
+    <div class="card mx-auto" >
       {% if post.post_image %}
       <img src="{{ post.post_image.url }}" class="card-img-top" alt="...">
       {% endif %}
@@ -65,7 +65,7 @@
         </div>
       </div>
 </div>
-</ul>
+
 
 
 {% endfor %}

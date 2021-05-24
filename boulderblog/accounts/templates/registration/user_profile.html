@@ -4,7 +4,7 @@
 
 {% block content %}
 
-    <div class="card mx-auto" style="width: 50rem;">
+    <div class="card mx-auto" >
 
       {% if page_user.profile_pic %}
       <img src="{{ page_user.profile_pic.url }}" class="card-img-top" width= 100%>
@@ -36,7 +36,7 @@
 
 
     <br><hr>
-    <span class="navbar-nav mx-auto" style="width: 50rem;">
+    <span class="navbar-nav mx-auto">
     <a href="{% url 'home' %}" class="btn btn-secondary btn-sm backattack">Back</a> </span>
     <br><br>
 
